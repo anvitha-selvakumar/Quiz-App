@@ -1,0 +1,96 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Quiz Application</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>
+
+<br />
+<br />
+<br/>
+<div class="jumbotron" class="container col-md-9">
+<h1> Welcome to the Trivia Quiz!</h1>
+<p> There are 10 Questions in this Quiz. </p>
+<p> Please follow the instructions below to navigate through the Quiz</p>
+<p> 1. Next: To move to the next question </p>  
+<p> 2. Submit Response: To submit your response to a question. Please click on Submit Response to record your response for each question! Or else it will not be recorded. </p> 
+<p> 3. Submit Quiz: To submit your quiz and get your results </p>
+<p> Good luck on your Quiz!! </p>
+</div>
+
+
+<div class="text-center">
+<input type="button" value="Start Quiz" class="btn btn-outline-success" (click)="loadQuizQuestion()" />
+</div>
+<hr/>
+
+<div class="container col-md-9" *ngIf="flag" >
+<div>
+    <form name="radioAnswers" >
+    <div >
+    <label> {{this.quizNumber}}.  </label>
+    <label> {{this.question}} </label> <br/>
+    <div >
+		<input type="radio" checked ng-value="this.quizNumber" ng-click="clicked(0)" name="choice{{this.quizNumber}}" value="{{this.quizNumber}}0" id="{{this.quizNumber}}" [(ngModel)]="AnsSelected"><label id="label0" >{{this.option1}}</label><br/>
+		<input type="radio" checked ng-value="this.quizNumber" ng-click="clicked(1)" name="choice{{this.quizNumber}}" value="{{this.quizNumber}}1" id="{{this.quizNumber}}" [(ngModel)]="AnsSelected"><label id="label1" >{{this.option2}}</label><br/>
+		<input type="radio" checked ng-value="this.quizNumber" ng-click="clicked(2)" name="choice{{this.quizNumber}}" value="{{this.quizNumber}}2" id="{{this.quizNumber}}" [(ngModel)]="AnsSelected"><label id="label2" >{{this.option3}}</label><br/>
+		<input type="radio" checked ng-value="this.quizNumber" ng-click="clicked(3)" name="choice{{this.quizNumber}}" value="{{this.quizNumber}}3" id="{{this.quizNumber}}" [(ngModel)]="AnsSelected"><label id="label3" >{{this.option4}}</label><br/>
+    </div>
+       
+    </div>
+	</form>
+    </div> 
+    <div class="text-center">
+    <!-- <input type="button" style="margin:5px" value="Prev" (click)="loadPrevQuizQuestion()" /> -->
+     
+	 <input type="submit" style="margin:5px" value="Submit Response" class="btn btn-outline-primary" id="submit" (click)="quizValidate()"/>
+     <input type="button" style="margin:5px" value="Next" class="btn btn-outline-secondary" (click)="loadNextQuizQuestion()" /><br/><br/> <span> </span>
+     <input type="submit" style="margin:5px" value="Submit Quiz" class="btn btn-success" id="submit" (click)="quizSubmit()"/><br/>
+    </div> 
+</div>
+<br/>
+
+
+<!-- *ngFor="let qq of quiz"
+[(ngModel)]="AnsSelected"
+checked ng-value="option" name="option" ng-click="clicked(option)"
+[(ngModel)]="c{{this.i}}-->
+
+<main role="main" class="container">
+    <div class ="jumbotron container col-md-9 text-center" *ngIf="displayResult" >
+    <h4> Results of your Quiz</h4>
+    <p> Total number of questions: 10 </p>
+    <p> Number of correct answers: {{this.score}}</p>
+    <p> Number of wrong answers: {{10 - this.score}}</p>
+    <input type="button" style="margin:5px" value="View Answers" class="btn btn-outline-info" id="answers" (click)="viewAnswers()"/><br/>
+    </div>
+
+</main>
+
+<main role="main" class="container">
+    <div class ="jumbotron container col-md-9 text-center" *ngIf="displayAnswers" >
+        <form name="radioAns" *ngFor="let qq of quiz">
+    <div >
+    <label> {{qq.quizNumber}}.  </label>
+    <label> {{qq.question}} </label> <br/>
+    <div >
+		<label id="label0" >{{qq.option1}}</label><br/>
+		<label id="label1" >{{qq.option2}}</label><br/>
+		<label id="label2" >{{qq.option3}}</label><br/>
+		<label id="label3" >{{qq.option4}}</label><br/>
+        <label id="ansLabel">The correct answer is: {{qq.answer}}</label><br/>
+    </div>
+       
+    </div>
+    <hr/>
+	</form>
+    </div>
+</main>
+
+
+<footer class="blog-footer">
+  <p>Quiz template built by Anvitha</p>
+  <p>
+    <a href="#">Back to top</a>
+  </p>
+</footer>
